@@ -27,7 +27,8 @@ class ClingoApp(object):
         # read subdomains in #program insts.
         self._readSubDoms(ctl_insts,files)
         if self.ground:
-            print(self.prg)
+            print("Successfully ground!")
+            #print(self.prg)
 
         term_transformer = TermTransformer(self.sub_doms, self.no_show)
         parse_files(files, lambda stm: term_transformer(stm))
@@ -77,7 +78,7 @@ class ClingoApp(object):
                 _addToSubdom(self.sub_doms, var, atom)
 
 
-class NglpDlpTransformer(Transformer):  
+class NglpDlpTransformer(Transformer):
     def __init__(self, bld, terms, facts, ng_heads, shows, sub_doms, ground_guess, ground):
         self.rules = False
         self.ng = False
