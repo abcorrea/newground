@@ -27,8 +27,15 @@ class ClingoApp(object):
         # read subdomains in #program insts.
         self._readSubDoms(ctl_insts,files)
         if self.ground:
-            print("Successfully ground!")
-            #print(self.prg)
+            atoms = 0
+            for f in self.prg.facts:
+                fact = f.symbol
+                if not str(fact).startswith("__x") and not str(fact).startswith("equals"):
+                    # count everything which is not temporary and build-int
+                    atoms = atoms + 1
+
+            print("Size of the model:", len(self.prg.facts))
+            print("Number of atoms (not actions): %d" % atoms)
 
         term_transformer = TermTransformer(self.sub_doms, self.no_show)
         parse_files(files, lambda stm: term_transformer(stm))
